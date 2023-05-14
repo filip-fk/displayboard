@@ -66,3 +66,22 @@ h2, h3, h4, h5, h6 {
 .time-box{
   padding-right: 10px;
 }
+
+.miniheader{
+  color: white;
+  margin-top: 20px ;
+}
+
+.holzerhurdnumber{
+  color: #111;
+  background-color: #fdf;
+  border-radius: 7px;
+  padding: 3px 8px;
+}
+
+.muhlackernumber{
+  color: #eee;
+  background-color: rgb(4, 80, 131); /*hsl(199, 80%, 68%);*/
+  border-radius: 7px;
+  padding: 3px 8px;
+}
