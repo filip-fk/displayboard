@@ -77,7 +77,6 @@ function getData() {
         let i = 0;
         deps.forEach(dep => {
 
-            const stop_ = dep.stop;
             const dest_ = dep.direction;
             const time_ = dep.time;
     
@@ -92,7 +91,9 @@ function getData() {
             specifiedTime.setSeconds(seconds);
             const timeDiff = Math.floor((specifiedTime - currentTime) / (1000 * 60));
 
-            const generatedHtml = generateDepBox(i, 'B32', dest_, timeDiff, time_, dest_ != "Zürich, Strassenverkehrsamt");
+            
+
+            const generatedHtml = generateDepBox(i, 'B32', dest_, timeDiff, hours+':'+minutes, dest_ != "Zürich, Strassenverkehrsamt");
             container.appendChild(generatedHtml);
 
             i++;
