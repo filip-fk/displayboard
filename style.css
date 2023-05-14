@@ -41,14 +41,17 @@ h2, h3, h4, h5, h6 {
 }
 
 .dep-box {
-  margin-bottom: 15px;
+  padding: 10px 0px;
   display: flex;
   height: 50px;
   width: 100%;
-  padding: 0;
   align-items: center;
   flex-wrap: nowrap;
   justify-content: space-between;
+  background: #111;
+  margin: 10px;
+  border-radius: 10px;
+  flex-direction: row;
 }
 
 .time-box, .attention-box {
@@ -58,4 +61,8 @@ h2, h3, h4, h5, h6 {
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
+}
+
+.time-box{
+  padding-right: 10px;
 }
