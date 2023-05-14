@@ -1,5 +1,5 @@
 // Function to generate the HTML structure
-function generateDepBox(id, busName, attention, timetodep, time, displayAttention) {
+function generateDepBox(id, busName, attention, timetodep, time, displayAttention, displayDelay, delay) {
     // Create the main div element with id and class
     const depBox = document.createElement('div');
     depBox.id = `dep-${id}`;
@@ -41,9 +41,16 @@ function generateDepBox(id, busName, attention, timetodep, time, displayAttentio
     timetodepHeading.textContent = `${timetodep}'`;
   
     // Create the time heading element with id
-    const timeHeading = document.createElement('h3');
+    const timeHeading = displayDelay ? document.createElement('h4') : document.createElement('h3') ;
     timeHeading.id = `time-${id}`;
-    timeHeading.textContent = time;
+    timeHeading.textContent = displayDelay ? time + " +" + delay +"'" : time;
+    if(!displayDelay)
+    {
+        timetodepHeading.style.color = '#ddffdd';
+    }
+    else{
+        timetodepHeading.style.color = '#ff6868';
+    }
   
     // Append the timetodep and time headings to the time box
     timeBox.appendChild(timetodepHeading);
@@ -77,6 +84,7 @@ function getData() {
         let i = 0;
         deps.forEach(dep => {
 
+            const rttime_ = dep.rtTime ? dep.rtTime : dep.time;
             const dest_ = dep.direction;
             const time_ = dep.time;
     
@@ -89,11 +97,19 @@ function getData() {
             specifiedTime.setHours(hours);
             specifiedTime.setMinutes(minutes);
             specifiedTime.setSeconds(seconds);
-            const timeDiff = Math.floor((specifiedTime - currentTime) / (1000 * 60));
-
             
+            const [rthours, rtminutes, rtseconds] = rttime_.split(':');
+            const rtstime = new Date();
+            rtstime.setHours(rthours);
+            rtstime.setMinutes(rtminutes);
+            rtstime.setSeconds(rtseconds);
+            const rtdiff = Math.floor((rtstime - specifiedTime) / (1000 * 60));
 
-            const generatedHtml = generateDepBox(i, 'B32', dest_, timeDiff, hours+':'+minutes, dest_ != "Zürich, Strassenverkehrsamt");
+            const timeDiff = Math.floor((rtstime - currentTime) / (1000 * 60));
+
+            console.log(rtdiff);
+
+            const generatedHtml = generateDepBox(i, 'B32', dest_, timeDiff, hours+':'+minutes, dest_ != "Zürich, Strassenverkehrsamt", rtdiff != 0, rtdiff);
             container.appendChild(generatedHtml);
 
             i++;
