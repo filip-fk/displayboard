@@ -162,9 +162,11 @@ function getData() {
         let i = 0;
         deps.forEach(dep => {
 
-            const rttime_ = dep.rtTime ? dep.rtTime : dep.time;
+            const rttime_ = dep.rtTime ? dep.rtTime : dep.time; //hh:mm:ss
+            const rtdate_ = dep.rtDate ? dep.rtDate : dep.date; //yyyy-mm-dd
+            const time_ = dep.time; //hh:mm:ss
+            const date_ = dep.date; //yyyy-mm-dd
             const dest_ = dep.direction;
-            const time_ = dep.time;
     
             // Create and append text elements for each day entry
             //createTextElement(container, `B32 ${dest_ == "Zürich, Strassenverkehrsamt"?'':dest_} ${time_}`);
@@ -175,12 +177,19 @@ function getData() {
             specifiedTime.setHours(hours);
             specifiedTime.setMinutes(minutes);
             specifiedTime.setSeconds(seconds);
+            specifiedTime.setYear(date_.substring(0,4));
+            specifiedTime.setMonth(date_.substring(5,2));
+            specifiedTime.setDate(date_.substring(8));
             
             const [rthours, rtminutes, rtseconds] = rttime_.split(':');
             const rtstime = new Date();
             rtstime.setHours(rthours);
             rtstime.setMinutes(rtminutes);
             rtstime.setSeconds(rtseconds);
+            specifiedTime.setYear(rtdate_.substring(0,4));
+            specifiedTime.setMonth(rtdate_.substring(5,2));
+            specifiedTime.setDate(rtdate_.substring(8));
+
             const rtdiff = Math.floor((rtstime - specifiedTime) / (1000 * 60));
 
             const timeDiff = Math.floor((rtstime - currentTime) / (1000 * 60));
