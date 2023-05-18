@@ -112,18 +112,18 @@ function getData() {
             specifiedTime.setHours(hours);
             specifiedTime.setMinutes(minutes);
             specifiedTime.setSeconds(seconds);
-            specifiedTime.setYear(date_.subString(0,4));
-            specifiedTime.setMonth(date_.subString(5,2));
-            specifiedTime.setDate(date_.subString(8));
+            specifiedTime.setYear(date_.substring(0,4));
+            specifiedTime.setMonth(date_.substring(5,2));
+            specifiedTime.setDate(date_.substring(8));
             
             const [rthours, rtminutes, rtseconds] = rttime_.split(':');
             const rtstime = new Date();
             rtstime.setHours(rthours);
             rtstime.setMinutes(rtminutes);
             rtstime.setSeconds(rtseconds);
-            specifiedTime.setYear(rtdate_.subString(0,4));
-            specifiedTime.setMonth(rtdate_.subString(5,2));
-            specifiedTime.setDate(rtdate_.subString(8));
+            specifiedTime.setYear(rtdate_.substring(0,4));
+            specifiedTime.setMonth(rtdate_.substring(5,2));
+            specifiedTime.setDate(rtdate_.substring(8));
 
             const rtdiff = Math.floor((rtstime - specifiedTime) / (1000 * 60));
 
